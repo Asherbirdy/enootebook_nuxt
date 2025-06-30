@@ -56,8 +56,6 @@ export default defineNuxtConfig({
   routeRules: {
     [PublicRoutes.Login]: { ssr: false },
     [`${ClientBase}/**`]: { ssr: false },
-    [`${PublicRoutes.LandingPage}/**`]: { isr: 60 * 30 },
-    [`${PublicRoutes.LineOa}/**`]: { ssr: false },
   },
 
   future: {
@@ -80,14 +78,14 @@ export default defineNuxtConfig({
     },
   },
 
-  vite: {
-    server: {
-      allowedHosts: [
-        // 測試 LineOA 的 ngrok
-        String(process.env.NUXT_PUBLIC_WHITELIST_NGROK),
-      ],
-    },
-  },
+  // vite: {
+  //   server: {
+  //     allowedHosts: [
+  //       // 測試 LineOA 的 ngrok
+  //       String(process.env.NUXT_PUBLIC_WHITELIST_NGROK),
+  //     ],
+  //   },
+  // },
 
   eslint: {
     config: {

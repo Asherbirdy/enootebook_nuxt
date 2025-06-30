@@ -1,10 +1,9 @@
-import type { LandingPageAccess, Role } from '~/enum'
+import type { Role } from '~/enum'
 
 export interface UserPageDataType {
   form: {
     userId: string
     role: Role
-    landingPageAccess: LandingPageAccess[]
   }
 }
 

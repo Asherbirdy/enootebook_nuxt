@@ -1,7 +1,8 @@
-import type { AttendanceAccountGetAll } from '~/type'
-
 export interface AttendanceAccountDataType {
-  form: AttendanceAccountGetAll
+  form: {
+    name: string
+    api: string
+  }
 }
 
 export interface AttendanceAccountFeatureType {

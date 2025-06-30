@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { BindOTPEmailErrorType, IndexStateData, IndexStateFeature, StateType } from '~/type'
+import type { BindOTPEmailErrorType } from '~/type'
 import { useAuthApi, useUserApi } from '~/apis'
 
 const toast = useToast()
-const state = ref<StateType<IndexStateData, IndexStateFeature>>({
+const state = ref({
   data: {
     emailVerifiedModal: {
       OTP: '',
