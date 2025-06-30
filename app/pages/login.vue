@@ -8,7 +8,7 @@ const toast = useToast()
 const state = ref({
   data: {
     login: {
-      email: '',
+      name: '',
       password: '',
     },
     register: {
@@ -150,9 +150,8 @@ onMounted(init)
         class="self-end"
         :loading="LoginStatus === 'pending'"
         :disabled="(
-          !state.data.login.email
+          !state.data.login.name
           || !state.data.login.password
-          || !state.data.login.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
         )"
 
         @click="onLogin"

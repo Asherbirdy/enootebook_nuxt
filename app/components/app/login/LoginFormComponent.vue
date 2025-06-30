@@ -1,25 +1,15 @@
 <script setup lang="ts">
 import type { FormError } from '@nuxt/ui'
+import type { LoginPayload } from '~/type'
 
-interface Model {
-  email: string
-  password: string
-}
+const modelValue = defineModel<LoginPayload>({ required: true })
 
-const modelValue = defineModel<Model>({ required: true })
-
-const validate = (state: Partial<Model>): FormError[] => {
+const validate = (state: Partial<LoginPayload>): FormError[] => {
   const errors = []
-  if (!state.email) {
+  if (!state.name) {
     errors.push({
-      name: 'email',
+      name: 'name',
       message: 'Required',
-    })
-  }
-  if (!regex.email.test(String(state.email))) {
-    errors.push({
-      name: 'email',
-      message: 'Invalid email format',
     })
   }
   if (!state.password) {
@@ -43,7 +33,7 @@ const validate = (state: Partial<Model>): FormError[] => {
       name="email"
     >
       <UInput
-        v-model="modelValue.email"
+        v-model="modelValue.name"
         class="w-full"
       />
     </UFormField>
