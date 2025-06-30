@@ -120,10 +120,8 @@ const validate = (state: Partial<{
     <UCard>
       <h2>姓名：{{ UserInfoResponse?.user.name || '未設定' }}</h2>
       <h2>電子信箱：{{ UserInfoResponse?.user.email || '未設定' }}</h2>
-      <h2>區域：{{ UserInfoResponse?.user?.district?.name ?? '未設定' }}</h2>
       <h2>Email驗證：{{ UserInfoResponse?.user.emailVerified ? '已驗證' : '未驗證' }}</h2>
       <h2>權限：{{ UserInfoResponse?.user.role }}</h2>
-      <h2>部落格權限：{{ UserInfoResponse?.user.landingPageAccess || '未設定' }}</h2>
     </UCard>
 
     <UModal

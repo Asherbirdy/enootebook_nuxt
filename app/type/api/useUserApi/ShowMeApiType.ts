@@ -13,10 +13,6 @@ export interface ShowMeUser {
   email: string
   emailVerified: boolean
   role: Role
-  district: ShowMeDistrict
-  leaderOfGroupIds: ShowMeLeaderOfGroupId[]
-  groups: ShowMeGroup[]
-  landingPageAccess: string[]
 }
 
 export interface ShowMeDistrict {

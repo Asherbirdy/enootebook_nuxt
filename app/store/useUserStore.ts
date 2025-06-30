@@ -8,15 +8,6 @@ export function useUserStore() {
     email: '',
     emailVerified: false,
     role: Role.user,
-    district: {
-      _id: '',
-      name: '',
-      active: false,
-      __v: 0,
-    },
-    leaderOfGroupIds: [],
-    groups: [],
-    landingPageAccess: [],
   }))
 
   const userInfo = computed(() => user.value)
