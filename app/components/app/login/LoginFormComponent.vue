@@ -9,13 +9,13 @@ const validate = (state: Partial<LoginPayload>): FormError[] => {
   if (!state.name) {
     errors.push({
       name: 'name',
-      message: 'Required',
+      message: '請輸入帳號',
     })
   }
   if (!state.password) {
     errors.push({
       name: 'password',
-      message: 'Required',
+      message: '請輸入密碼',
     })
   }
   return errors
@@ -26,26 +26,37 @@ const validate = (state: Partial<LoginPayload>): FormError[] => {
   <UForm
     :state="modelValue"
     :validate="validate"
-    class="flex flex-col gap-4"
+    class="space-y-6"
   >
     <UFormField
-      label="Email"
-      name="email"
+      label="帳號"
+      name="name"
     >
       <UInput
         v-model="modelValue.name"
-        class="w-full"
-      />
+        placeholder="請輸入您的帳號"
+        class="w-full h-12 rounded-xl"
+      >
+        <template #leading>
+          <UIcon name="i-lucide-user" class="text-gray-400" />
+        </template>
+      </UInput>
     </UFormField>
+    
     <UFormField
-      label="Password"
+      label="密碼"
       name="password"
     >
       <UInput
         v-model="modelValue.password"
         type="password"
-        class="w-full"
-      />
+        placeholder="請輸入您的密碼"
+        class="w-full h-12 rounded-xl"
+      >
+        <template #leading>
+          <UIcon name="i-lucide-lock" class="text-gray-400" />
+        </template>
+      </UInput>
     </UFormField>
   </UForm>
 </template>
