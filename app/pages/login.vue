@@ -155,12 +155,12 @@ onMounted(init)
     <div class="relative w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-md bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700/50 px-4 py-6 sm:p-8 mx-auto">
       <!-- Logo 區域 -->
       <div class="text-center mb-6 sm:mb-8">
-        <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-3 sm:mb-4 shadow-lg">
+        <!-- <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-3 sm:mb-4 shadow-lg">
           <UIcon
             name="i-lucide-book-open"
             class="w-6 h-6 sm:w-8 sm:h-8 text-white"
           />
-        </div>
+        </div> -->
         <h1 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">
           歡迎回來
         </h1>
@@ -255,11 +255,11 @@ onMounted(init)
       </Transition>
 
       <!-- 底部文字 -->
-      <div class="text-center mt-4 sm:mt-6">
+      <!-- <div class="text-center mt-4 sm:mt-6">
         <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
           © 2024 E-Notebook. 保留所有權利
         </p>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
