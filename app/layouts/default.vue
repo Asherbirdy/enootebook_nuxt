@@ -54,7 +54,7 @@ const items = ref<DropdownMenuItem[][]>([
 
 <template>
   <div class="flex flex-col min-h-screen">
-    <header class="flex justify-between items-center">
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200 flex justify-between items-center px-4 py-3">
       <Logo />
       <div class="hidden md:block">
         <nav class="flex space-x-4">
