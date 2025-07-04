@@ -144,7 +144,7 @@ onMounted(init)
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4 relative">
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-start justify-start p-4 pt-20">
     <!-- 背景裝飾元素 (小螢幕隱藏) -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none hidden sm:block">
       <div class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl" />
@@ -152,7 +152,7 @@ onMounted(init)
     </div>
 
     <!-- 主要內容卡片 -->
-    <div class="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-md bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700/50 px-4 py-6 sm:p-8 mx-auto">
+    <div class="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-md bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700/50 px-4 py-6 sm:p-8">
       <!-- Logo 區域 -->
       <div class="text-center mb-6 sm:mb-8">
         <!-- <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-3 sm:mb-4 shadow-lg">
