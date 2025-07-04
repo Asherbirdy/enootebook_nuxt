@@ -144,7 +144,7 @@ onMounted(init)
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-start justify-start p-4 pt-20">
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-start justify-center p-4 pt-20">
     <!-- 背景裝飾元素 (小螢幕隱藏) -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none hidden sm:block">
       <div class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl" />
