@@ -21,6 +21,9 @@ const state = ref({
   },
 })
 
+// 添加當前選中的標籤狀態
+const currentTab = ref('login')
+
 /*
   * LOGIN API
 */
@@ -61,6 +64,11 @@ const tabs = [
     slot: 'register' as const,
   },
 ]
+
+// 處理標籤切換
+const handleTabChange = (tabSlot: string) => {
+  currentTab.value = tabSlot
+}
 
 const onLogin = async () => {
   const { login } = state.value.data
@@ -161,13 +169,47 @@ onMounted(init)
         </p>
       </div>
 
-      <!-- 登入/註冊卡片 -->
-      <UTabs
-        :items="tabs"
-        class="gap-4 sm:gap-6"
+      <!-- 自定義標籤切換 -->
+      <div class="mb-6 sm:mb-8">
+        <div class="flex bg-gray-100 dark:bg-gray-700 rounded-xl p-1">
+          <button
+            v-for="tab in tabs"
+            :key="tab.slot"
+            class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium text-sm sm:text-base transition-all duration-300 ease-in-out relative"
+            :class="{
+              'text-blue-600 dark:text-blue-400 bg-white dark:bg-gray-600 shadow-sm': currentTab === tab.slot,
+              'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200': currentTab !== tab.slot,
+            }"
+            @click="handleTabChange(tab.slot)"
+          >
+            <UIcon
+              :name="tab.icon"
+              class="w-4 h-4 sm:w-5 sm:h-5"
+              :class="{
+                'text-blue-600 dark:text-blue-400': currentTab === tab.slot,
+                'text-gray-500 dark:text-gray-400': currentTab !== tab.slot,
+              }"
+            />
+            {{ tab.label }}
+          </button>
+        </div>
+      </div>
+
+      <!-- 登入/註冊內容 - 使用 Transition 實現高度動畫 -->
+      <Transition
+        name="height-fade"
+        mode="out-in"
+        appear
       >
-        <template #login>
-          <div class="space-y-4 sm:space-y-6">
+        <div
+          :key="currentTab"
+          class="overflow-hidden"
+        >
+          <!-- 登入表單 -->
+          <div
+            v-if="currentTab === 'login'"
+            class="space-y-4 sm:space-y-6"
+          >
             <LoginFormComponent v-model="state.data.login" />
             <UButton
               label="登入"
@@ -183,10 +225,12 @@ onMounted(init)
               @click="onLogin"
             />
           </div>
-        </template>
 
-        <template #register>
-          <div class="space-y-4 sm:space-y-6">
+          <!-- 註冊表單 -->
+          <div
+            v-else-if="currentTab === 'register'"
+            class="space-y-4 sm:space-y-6"
+          >
             <RegisterFormComponent v-model="state.data.register" />
             <UButton
               label="註冊"
@@ -207,8 +251,8 @@ onMounted(init)
               @click="onRegister"
             />
           </div>
-        </template>
-      </UTabs>
+        </div>
+      </Transition>
 
       <!-- 底部文字 -->
       <div class="text-center mt-4 sm:mt-6">
@@ -219,3 +263,30 @@ onMounted(init)
     </div>
   </div>
 </template>
+
+<style scoped>
+/* 高度和淡入淡出動畫 */
+.height-fade-enter-active,
+.height-fade-leave-active {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.height-fade-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+  max-height: 0;
+}
+
+.height-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+  max-height: 0;
+}
+
+.height-fade-enter-to,
+.height-fade-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 1000px;
+}
+</style>
