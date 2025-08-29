@@ -3,6 +3,10 @@ import { useAuthApi } from '~/apis'
 import { LoginFormComponent, RegisterFormComponent } from '~/components'
 import { ClientRoutes, CookieEnums } from '~/enum'
 
+definePageMeta({
+  layout: 'none',
+})
+
 const toast = useToast()
 
 const state = ref({
