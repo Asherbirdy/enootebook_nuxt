@@ -3,6 +3,10 @@ import { useRequestApi } from '~/composables'
 import { PublicRequestUrl } from '~/enum'
 
 export const useQuizApi = {
+
+  /*
+    * 建立 quiz
+  */
   create: async (payload: CreateQuizPayload) => {
     return await useRequestApi<CreateQuizResponse, any>(
       `${PublicRequestUrl.Dev}?libraryId=${payload.libraryId}&quizQuantity=${payload.quizQuantity}`,
@@ -13,6 +17,10 @@ export const useQuizApi = {
       },
     )
   },
+
+  /*
+    * 取得 current quiz
+  */
   currentQuiz: async () => {
     return await useRequestApi(PublicRequestUrl.Dev, {
       method: 'GET',
