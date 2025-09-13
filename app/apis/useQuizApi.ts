@@ -2,35 +2,35 @@ import { useRequestApi } from '~/composables'
 import { PublicRequestUrl } from '~/enum'
 
 export const useQuizApi = {
-  get: async () => {
+  create: async () => {
     return await useRequestApi(PublicRequestUrl.Dev, {
       method: 'GET',
       server: false,
       lazy: true,
     })
   },
-  ge2t: async () => {
+  currentQuiz: async () => {
     return await useRequestApi(PublicRequestUrl.Dev, {
       method: 'GET',
       server: false,
       lazy: true,
     })
   },
-  ge23t: async () => {
+  getQuizQuestions: async () => {
     return await useRequestApi(PublicRequestUrl.Dev, {
       method: 'GET',
       server: false,
       lazy: true,
     })
   },
-  ge233t: async () => {
+  closeQuiz: async () => {
     return await useRequestApi(PublicRequestUrl.Dev, {
       method: 'GET',
       server: false,
       lazy: true,
     })
   },
-  ge2233t: async () => {
+  answerQuiz: async () => {
     return await useRequestApi(PublicRequestUrl.Dev, {
       method: 'GET',
       server: false,
