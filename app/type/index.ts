@@ -13,6 +13,9 @@ export * from './api/useLibraryApi/EditLibraryType'
 export * from './api/useLibraryApi/GetAllLibraryType'
 export * from './api/useLibraryApi/GetVocabularyType'
 
+// useQuizApi
+export * from './api/useQuizApi/CreateQuizType'
+
 // useUserApi
 export * from './api/useUserApi/ChangeUserAccessType'
 export * from './api/useUserApi/GetUserListType'
