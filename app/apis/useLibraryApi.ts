@@ -1,25 +1,11 @@
+import type { GetAllLibraryResponse, GetVocabularyResponse } from '~/type'
 import { useRequestApi } from '~/composables'
 import { PublicRequestUrl } from '~/enum'
 
-export interface GetAllLibraryResponse {
-  msg: string
-  count: number
-  library: Library[]
-}
-
-export interface Library {
-  _id: string
-  userId: string
-  title: string
-  averageLevel: number
-  librarySize: number
-  onQuiz: boolean
-  createdAt: string
-  updatedAt: string
-  __v: number
-}
-
 export const useLibraryApi = {
+  /*
+    * 取得所有 library
+ */
   getAll: async () => {
     return await useRequestApi<GetAllLibraryResponse, any>(PublicRequestUrl.Dev, {
       method: 'GET',
@@ -27,16 +13,17 @@ export const useLibraryApi = {
       lazy: true,
     })
   },
-  getvobFromLin: async () => {
-    return await useRequestApi(PublicRequestUrl.Dev, {
+  getVocabulary: async (libraryId: string) => {
+    return await useRequestApi<GetVocabularyResponse, any>(`${PublicRequestUrl.Dev}?libraryId=${libraryId}`, {
       method: 'GET',
       server: false,
       lazy: true,
     })
   },
-  create: async () => {
+  create: async (title: string) => {
     return await useRequestApi(PublicRequestUrl.Dev, {
-      method: 'GET',
+      method: 'POST',
+      body: { title },
       server: false,
       lazy: true,
     })
