@@ -1,4 +1,4 @@
-import type { CreateQuizPayload, CreateQuizResponse, GetQuizQuestionsResponse, GetQuizResponse } from '~/type'
+import type { CloseQuizPayload, CloseQuizResponse, CreateQuizPayload, CreateQuizResponse, GetQuizQuestionsResponse, GetQuizResponse } from '~/type'
 import { useRequestApi } from '~/composables'
 import { PublicRequestUrl } from '~/enum'
 
@@ -42,12 +42,19 @@ export const useQuizApi = {
       },
     )
   },
-  closeQuiz: async () => {
-    return await useRequestApi(PublicRequestUrl.Dev, {
-      method: 'GET',
-      server: false,
-      lazy: true,
-    })
+
+  /*
+    * 關閉 quiz
+  */
+  closeQuiz: async (libraryId: CloseQuizPayload) => {
+    return await useRequestApi<CloseQuizResponse, any>(
+      `${PublicRequestUrl.Dev}?libraryId=${libraryId}`,
+      {
+        method: 'POST',
+        server: false,
+        lazy: true,
+      },
+    )
   },
   answerQuiz: async () => {
     return await useRequestApi(PublicRequestUrl.Dev, {
