@@ -34,4 +34,8 @@ export enum UserRequestUrl {
 
   // USER
   UserShowMe = '/users/showMe',
+
+  // LIBRARY
+  Library = '/library',
+  LibraryGetVocabulary = '/library/vocabularyFromLibraryId',
 }
