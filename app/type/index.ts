@@ -20,6 +20,7 @@ export * from './api/useUserApi/ShowMeApiType'
 
 // useVocabularyApi
 export * from './api/useVocabularyApi/AddVobToLibraryType'
+export * from './api/useVocabularyApi/EditVocabularyType'
 
 // * PAGE
 export * from './page/C/AttendanceAccountPage'
