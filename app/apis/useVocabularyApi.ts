@@ -1,4 +1,5 @@
-import type { AddVobToLibraryPayload, AddVobToLibraryResponse, EditVobPayload, EditVobResponse } from '~/type'
+import type { AddVobToLibraryPayload, AddVobToLibraryResponse, DeleteVobPayload, DeleteVobResponse, EditVobPayload, EditVobResponse } from '~/type'
+
 import { useRequestApi } from '~/composables'
 import { PublicRequestUrl } from '~/enum'
 
@@ -30,14 +31,20 @@ export const useVocabularyApi = {
       },
     )
   },
-
-  deleteVob: async () => {
-    return await useRequestApi(PublicRequestUrl.Dev, {
-      method: 'GET',
+  /*
+    * 刪除 vocabulary
+  */
+  deleteVob: async (payload: DeleteVobPayload) => {
+    return await useRequestApi<DeleteVobResponse, any>(PublicRequestUrl.Dev, {
+      method: 'DELETE',
+      body: payload,
       server: false,
       lazy: true,
     })
   },
+  /*
+    * 檢查 vocabulary 是否存在
+  */
   checkVobExist: async () => {
     return await useRequestApi(PublicRequestUrl.Dev, {
       method: 'GET',
