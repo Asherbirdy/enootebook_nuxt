@@ -1,5 +1,4 @@
-import type { CreateLibraryResponse, EditLibraryPayload, EditLibraryResponse, GetAllLibraryResponse, GetVocabularyResponse } from '~/type'
-
+import type { CreateLibraryResponse, DeleteLibraryResponse, EditLibraryPayload, EditLibraryResponse, GetAllLibraryResponse, GetVocabularyResponse } from '~/type'
 import { useRequestApi } from '~/composables'
 import { PublicRequestUrl } from '~/enum'
 
@@ -50,16 +49,14 @@ export const useLibraryApi = {
       lazy: true,
     })
   },
-  deleteLib: async () => {
-    return await useRequestApi(PublicRequestUrl.Dev, {
-      method: 'GET',
-      server: false,
-      lazy: true,
-    })
-  },
-  getAll5: async () => {
-    return await useRequestApi(PublicRequestUrl.Dev, {
-      method: 'GET',
+
+  /*
+    * 刪除 library
+  */
+  delete: async (libraryId: string) => {
+    return await useRequestApi<DeleteLibraryResponse, any>(PublicRequestUrl.Dev, {
+      method: 'DELETE',
+      body: { libraryId },
       server: false,
       lazy: true,
     })
