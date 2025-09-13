@@ -6,11 +6,12 @@ export * from './api/useAuthApi/LoginApiType'
 
 export * from './api/useAuthApi/RegisterApiType'
 
+export * from './api/useLibraryApi/GetAllLibraryType'
+
 // useUserApi
 export * from './api/useUserApi/ChangeUserAccessType'
 
 export * from './api/useUserApi/GetUserListType'
-
 export * from './api/useUserApi/ShowMeApiType'
 
 // * PAGE
