@@ -7,8 +7,10 @@ export * from './api/useAuthApi/LoginApiType'
 export * from './api/useAuthApi/RegisterApiType'
 
 export * from './api/useLibraryApi/CreateLibraryType'
+export * from './api/useLibraryApi/EditLibraryType'
 export * from './api/useLibraryApi/GetAllLibraryType'
 export * from './api/useLibraryApi/GetVocabularyType'
+
 // useUserApi
 export * from './api/useUserApi/ChangeUserAccessType'
 

@@ -1,9 +1,10 @@
-import type { CreateLibraryResponse, GetAllLibraryResponse, GetVocabularyResponse } from '~/type'
+import type { CreateLibraryResponse, EditLibraryPayload, EditLibraryResponse, GetAllLibraryResponse, GetVocabularyResponse } from '~/type'
 
 import { useRequestApi } from '~/composables'
 import { PublicRequestUrl } from '~/enum'
 
 export const useLibraryApi = {
+
   /*
     * 取得所有 library
   */
@@ -14,8 +15,9 @@ export const useLibraryApi = {
       lazy: true,
     })
   },
+
   /*
-    * 取得所有 vocabulary
+    * 取得 指定 library 所有 vocabulary
   */
   getVocabulary: async (libraryId: string) => {
     return await useRequestApi<GetVocabularyResponse, any>(`${PublicRequestUrl.Dev}?libraryId=${libraryId}`, {
@@ -24,6 +26,7 @@ export const useLibraryApi = {
       lazy: true,
     })
   },
+
   /*
     * 建立 library
   */
@@ -31,6 +34,18 @@ export const useLibraryApi = {
     return await useRequestApi<CreateLibraryResponse, any>(PublicRequestUrl.Dev, {
       method: 'POST',
       body: { title },
+      server: false,
+      lazy: true,
+    })
+  },
+
+  /*
+    * 修改 library
+  */
+  edit: async (payload: EditLibraryPayload) => {
+    return await useRequestApi<EditLibraryResponse, any>(PublicRequestUrl.Dev, {
+      method: 'POST',
+      body: payload,
       server: false,
       lazy: true,
     })
