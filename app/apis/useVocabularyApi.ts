@@ -1,15 +1,10 @@
+import type { AddVobToLibraryPayload, AddVobToLibraryResponse } from '~/type'
 import { useRequestApi } from '~/composables'
 import { PublicRequestUrl } from '~/enum'
 
-interface AddVobToLibraryPayload {
-  libraryId: string
-  word: string
-  translation: string
-}
-
 export const useVocabularyApi = {
   addVobToLibrary: async (payload: AddVobToLibraryPayload) => {
-    return await useRequestApi(PublicRequestUrl.Dev, {
+    return await useRequestApi<AddVobToLibraryResponse, any>(PublicRequestUrl.Dev, {
       method: 'POST',
       body: payload,
       server: false,
