@@ -1,4 +1,6 @@
 export * from './useAuthApi'
 export * from './useDevApi'
 export * from './useLibraryApi'
+export * from './useQuizRecordApi'
 export * from './useUserApi'
+export * from './useVocabularyApi'
