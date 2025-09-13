@@ -1,5 +1,5 @@
 import type { AddVobToLibraryPayload, AddVobToLibraryResponse, DeleteVobPayload, DeleteVobResponse, EditVobPayload, EditVobResponse } from '~/type'
-
+import type { CheckVobExistPayload, CheckVobExistResponse } from '~/type/api/useVocabularyApi/CheckVobExistType'
 import { useRequestApi } from '~/composables'
 import { PublicRequestUrl } from '~/enum'
 
@@ -45,9 +45,10 @@ export const useVocabularyApi = {
   /*
     * 檢查 vocabulary 是否存在
   */
-  checkVobExist: async () => {
-    return await useRequestApi(PublicRequestUrl.Dev, {
+  checkVobExist: async (payload: CheckVobExistPayload) => {
+    return await useRequestApi<CheckVobExistResponse, any>(PublicRequestUrl.Dev, {
       method: 'GET',
+      body: payload,
       server: false,
       lazy: true,
     })
