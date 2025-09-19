@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { FormError } from '@nuxt/ui'
+import { regex } from '~/utils/common/regex'
 
 interface Model {
   name: string
