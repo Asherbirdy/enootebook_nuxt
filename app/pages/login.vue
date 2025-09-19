@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useAuthApi } from '~/apis'
-import { LoginFormComponent, RegisterFormComponent } from '~/components'
+import { LoginFormComponent } from '~/components'
 import { ClientRoutes, CookieEnums } from '~/enum'
 
 definePageMeta({
@@ -15,18 +15,8 @@ const state = ref({
       name: '',
       password: '',
     },
-    register: {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      serialNumber: '',
-    },
   },
 })
-
-// 添加當前選中的標籤狀態
-const currentTab = ref('login')
 
 /*
   * LOGIN API
@@ -39,40 +29,12 @@ const {
 } = await useAuthApi.login(state.value.data.login)
 
 /*
-  * REGISTER API
-*/
-const {
-  data: RegisterResponse,
-  execute: RegisterRequest,
-  status: RegisterStatus,
-  error: RegisterError,
-} = await useAuthApi.register(state.value.data.register)
-
-/*
   * CHECK VALID TOKEN API
 */
 const {
   data: CheckValidTokenResponse,
   refresh: CheckValidTokenRefresh,
 } = await useAuthApi.checkValidToken()
-
-const tabs = [
-  {
-    label: '登入',
-    icon: 'i-lucide-user',
-    slot: 'login' as const,
-  },
-  {
-    label: '註冊',
-    icon: 'i-lucide-lock',
-    slot: 'register' as const,
-  },
-]
-
-// 處理標籤切換
-const handleTabChange = (tabSlot: string) => {
-  currentTab.value = tabSlot
-}
 
 const onLogin = async () => {
   const { login } = state.value.data
@@ -96,38 +58,6 @@ const onLogin = async () => {
   navigateTo(ClientRoutes.Home)
 }
 
-const onRegister = async () => {
-  const { register } = state.value.data
-  await RegisterRequest()
-
-  if (RegisterError.value) {
-    toast.add({
-      title: '錯誤序號或重複註冊',
-      color: 'error',
-    })
-
-    register.serialNumber = ''
-    register.password = ''
-    register.confirmPassword = ''
-    return
-  }
-
-  toast.add({
-    title: '註冊成功 請登入',
-    color: 'success',
-  })
-
-  register.name = ''
-  register.email = ''
-  register.password = ''
-  register.confirmPassword = ''
-  register.serialNumber = ''
-
-  useCookie(CookieEnums.AccessToken).value = RegisterResponse.value?.token.accessTokenJWT
-  useCookie(CookieEnums.RefreshToken).value = RegisterResponse.value?.token.refreshTokenJWT
-
-  navigateTo(ClientRoutes.Home)
-}
 /*
   * ONMOUNTED
 */
@@ -169,94 +99,27 @@ onMounted(init)
           歡迎回來
         </h1>
         <p class="text-gray-600 dark:text-gray-400 text-xs sm:text-base">
-          請登入您的帳戶或註冊新帳戶
+          請登入您的帳戶
         </p>
       </div>
 
-      <!-- 自定義標籤切換 -->
-      <div class="mb-6 sm:mb-8">
-        <div class="flex bg-gray-100 dark:bg-gray-700 rounded-xl p-1">
-          <button
-            v-for="tab in tabs"
-            :key="tab.slot"
-            class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium text-sm sm:text-base transition-all duration-300 ease-in-out relative"
-            :class="{
-              'text-blue-600 dark:text-blue-400 bg-white dark:bg-gray-600 shadow-sm': currentTab === tab.slot,
-              'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200': currentTab !== tab.slot,
-            }"
-            @click="handleTabChange(tab.slot)"
-          >
-            <UIcon
-              :name="tab.icon"
-              class="w-4 h-4 sm:w-5 sm:h-5"
-              :class="{
-                'text-blue-600 dark:text-blue-400': currentTab === tab.slot,
-                'text-gray-500 dark:text-gray-400': currentTab !== tab.slot,
-              }"
-            />
-            {{ tab.label }}
-          </button>
-        </div>
+      <!-- 登入表單 -->
+      <div class="space-y-4 sm:space-y-6">
+        <LoginFormComponent v-model="state.data.login" />
+        <UButton
+          label="登入"
+          type="submit"
+          variant="solid"
+          color="primary"
+          class="w-full h-11 sm:h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+          :loading="LoginStatus === 'pending'"
+          :disabled="(
+            !state.data.login.name
+            || !state.data.login.password
+          )"
+          @click="onLogin"
+        />
       </div>
-
-      <!-- 登入/註冊內容 - 使用 Transition 實現高度動畫 -->
-      <Transition
-        name="height-fade"
-        mode="out-in"
-        appear
-      >
-        <div
-          :key="currentTab"
-          class="overflow-hidden"
-        >
-          <!-- 登入表單 -->
-          <div
-            v-if="currentTab === 'login'"
-            class="space-y-4 sm:space-y-6"
-          >
-            <LoginFormComponent v-model="state.data.login" />
-            <UButton
-              label="登入"
-              type="submit"
-              variant="solid"
-              color="primary"
-              class="w-full h-11 sm:h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
-              :loading="LoginStatus === 'pending'"
-              :disabled="(
-                !state.data.login.name
-                || !state.data.login.password
-              )"
-              @click="onLogin"
-            />
-          </div>
-
-          <!-- 註冊表單 -->
-          <div
-            v-else-if="currentTab === 'register'"
-            class="space-y-4 sm:space-y-6"
-          >
-            <RegisterFormComponent v-model="state.data.register" />
-            <UButton
-              label="註冊"
-              type="submit"
-              variant="solid"
-              color="secondary"
-              class="w-full h-11 sm:h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
-              :loading="RegisterStatus === 'pending'"
-              :disabled="(
-                !state.data.register.name
-                || !state.data.register.email
-                || !state.data.register.password
-                || !state.data.register.confirmPassword
-                || !state.data.register.serialNumber
-                || !state.data.register.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
-                || state.data.register.password !== state.data.register.confirmPassword
-              )"
-              @click="onRegister"
-            />
-          </div>
-        </div>
-      </Transition>
 
       <!-- 底部文字 -->
       <!-- <div class="text-center mt-4 sm:mt-6">
@@ -267,30 +130,3 @@ onMounted(init)
     </div>
   </div>
 </template>
-
-<style scoped>
-/* 高度和淡入淡出動畫 */
-.height-fade-enter-active,
-.height-fade-leave-active {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.height-fade-enter-from {
-  opacity: 0;
-  transform: translateY(10px);
-  max-height: 0;
-}
-
-.height-fade-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
-  max-height: 0;
-}
-
-.height-fade-enter-to,
-.height-fade-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-  max-height: 1000px;
-}
-</style>
